@@ -133,6 +133,10 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
 - Errors: `JobSourceUnavailable` (no internet, timeout, non-200) and `PlaceNotFound`
   (service says `suchmodus: UNGUELTIG`). Tests use `httpx.MockTransport` (tests/fakes.py).
 - Fake answers in tests use made-up company names (no real company data in the repo).
+- `GET /api/jobs?what=&where=&distance=25&job_type=any|part_time|full_time&posted_days=&page=1`.
+  Errors always come back as `{"message": "<friendly sentence>"}`: 400 no place, 404 place not
+  found, 422 bad input (FastAPI's technical validation answer is replaced), 503 job service down.
+  Technical details go to the server log only. Tests swap the source via `app.dependency_overrides`.
 
 ## Progress checklist
 ### Step 1 — Design first
@@ -159,7 +163,7 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
       v4 blocked (403), **v6 works**; field names updated in "Job source details" above.
 - [x] 2. Project setup: folders, venv, `requirements.txt`, `.gitignore`, `.env.example`, README skeleton
 - [x] 3. `Job` model + Jobsuche client that turns the answer into `Job` objects (+ tests)
-- [ ] 4. `GET /api/jobs` search route with filters + friendly errors (+ tests)
+- [x] 4. `GET /api/jobs` search route with filters + friendly errors (+ tests)
 - [ ] 5. SQLite saved-jobs storage (+ tests)
 - [ ] 6. Saved jobs routes: list, save, change status, remove, stats (+ tests)
 - [ ] 7. Frontend: turn the design into HTML/CSS, then connect it with JavaScript
