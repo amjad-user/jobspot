@@ -71,6 +71,16 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
 - Notes: answers contain German letters (ä, ö, ü, ß) — read as UTF-8. PowerShell 5.1 shows them
   wrong and its JSON reader can fail on `facetten` (duplicate company names); Python is fine.
 
+## How to set up and run JobSpot (for Claude Code)
+When someone says "set this up and run it for me":
+1. Windows: run `start.bat` (it finds Python 3.10+, makes `.venv`, installs `requirements.txt`,
+   copies `.env.example` to `.env`, starts the server on http://127.0.0.1:8000 and opens the browser).
+   If Python is missing, tell the person to install it from python.org with "Add python.exe to PATH".
+2. Without start.bat (any system):
+   `python -m venv .venv` → install `requirements-dev.txt` → `python -m backend.launcher`
+   (or `python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000`).
+3. Tests: `.venv\Scripts\python.exe -m pytest` (no internet needed).
+
 ## Install & privacy rules
 - Download from GitHub → double-click **one start file** → app opens in the browser.
 - A Claude Code user can say "set this up and run it for me" and it works.
@@ -157,6 +167,12 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
 - "Widen my search" = 100 km + no job type/date filter (hidden if already widest).
 - Browser check: a Playwright script (outside the repo, using installed Edge) clicked through
   search, filters, show more, save/unsave, status, stats, remove, dark mode, phone width.
+- `start.bat` only prepares Python; `backend/launcher.py` does the rest: if JobSpot already
+  answers on the port it just opens the browser again; else finds a free port (8000–8009),
+  starts uvicorn on 127.0.0.1 and opens the browser once `/api/health` answers.
+- Packages are reinstalled only when `requirements.txt` differs from the copy in
+  `.venv\installed-requirements.txt`. `start.bat` must keep CRLF line endings (.gitattributes).
+- Tested a real first start on a fresh copy in a folder with a space in its name (~14 s).
 
 ## Progress checklist
 ### Step 1 — Design first
@@ -187,6 +203,6 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
 - [x] 5. SQLite saved-jobs storage (+ tests)
 - [x] 6. Saved jobs routes: list, save, change status, remove, stats (+ tests)
 - [x] 7. Frontend: turn the design into HTML/CSS, then connect it with JavaScript
-- [ ] 8. `start.bat` one-click start + first-run checks
+- [x] 8. `start.bat` one-click start + first-run checks
 - [ ] 9. README with screenshots, final clean-up
 - [ ] Later: German language switch, more job sources, Mac start file, desktop app
