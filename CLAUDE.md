@@ -137,6 +137,11 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
   Errors always come back as `{"message": "<friendly sentence>"}`: 400 no place, 404 place not
   found, 422 bad input (FastAPI's technical validation answer is replaced), 503 job service down.
   Technical details go to the server log only. Tests swap the source via `app.dependency_overrides`.
+- SQLite (backend/storage.py): one table `saved_jobs`, a copy of the Job + `status` + `saved_at`.
+  Status values: saved / applied / replied / interview / rejected. New connection per action.
+  Saving an already-saved job keeps its status. Always `?` placeholders (no SQL injection).
+- Stats count later steps for earlier boxes: Saved = all, Applied = applied+replied+interview+
+  rejected, Replies = replied+interview+rejected, Interviews = interview.
 
 ## Progress checklist
 ### Step 1 — Design first
@@ -164,7 +169,7 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
 - [x] 2. Project setup: folders, venv, `requirements.txt`, `.gitignore`, `.env.example`, README skeleton
 - [x] 3. `Job` model + Jobsuche client that turns the answer into `Job` objects (+ tests)
 - [x] 4. `GET /api/jobs` search route with filters + friendly errors (+ tests)
-- [ ] 5. SQLite saved-jobs storage (+ tests)
+- [x] 5. SQLite saved-jobs storage (+ tests)
 - [ ] 6. Saved jobs routes: list, save, change status, remove, stats (+ tests)
 - [ ] 7. Frontend: turn the design into HTML/CSS, then connect it with JavaScript
 - [ ] 8. `start.bat` one-click start + first-run checks

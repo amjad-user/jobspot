@@ -42,6 +42,32 @@ class SearchFilters(BaseModel):
     page: int = Field(default=1, ge=1, le=40)
 
 
+# The steps of applying for a saved job
+JobStatus = Literal["saved", "applied", "replied", "interview", "rejected"]
+
+
+class SavedJob(Job):
+    """A job the person saved. It has everything a Job has, plus progress."""
+
+    status: JobStatus = "saved"
+    saved_at: str = ""              # date and time it was saved, for example "2026-10-05T14:30:00"
+
+
+class StatusChange(BaseModel):
+    """What the web page sends to change the status of a saved job."""
+
+    status: JobStatus
+
+
+class Stats(BaseModel):
+    """Simple numbers for the saved jobs page."""
+
+    saved: int          # all saved jobs
+    applied: int        # jobs the person applied to (applied, got a reply, interview or rejected)
+    replies: int        # jobs where the employer answered (got a reply, interview or rejected)
+    interviews: int     # jobs with an interview
+
+
 class SearchResult(BaseModel):
     """The answer to one search."""
 
