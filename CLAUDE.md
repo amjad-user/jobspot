@@ -173,6 +173,8 @@ When someone says "set this up and run it for me":
 - Packages are reinstalled only when `requirements.txt` differs from the copy in
   `.venv\installed-requirements.txt`. `start.bat` must keep CRLF line endings (.gitattributes).
 - Tested a real first start on a fresh copy in a folder with a space in its name (~14 s).
+- README screenshots live in `docs/screenshots/` (taken with a temporary database, live listings).
+- No LICENSE file yet — Amjad decides which license (MIT is common for portfolio projects).
 
 ## Progress checklist
 ### Step 1 — Design first
@@ -204,5 +206,5 @@ When someone says "set this up and run it for me":
 - [x] 6. Saved jobs routes: list, save, change status, remove, stats (+ tests)
 - [x] 7. Frontend: turn the design into HTML/CSS, then connect it with JavaScript
 - [x] 8. `start.bat` one-click start + first-run checks
-- [ ] 9. README with screenshots, final clean-up
+- [x] 9. README with screenshots, final clean-up
 - [ ] Later: German language switch, more job sources, Mac start file, desktop app
