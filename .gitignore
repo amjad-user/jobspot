@@ -1,0 +1,20 @@
+# Python virtual environment (made by start.bat)
+.venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Secrets and local settings
+.env
+
+# Saved jobs database (personal data, stays on this computer)
+data/*
+!data/.gitkeep
+
+# Editor and system files
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

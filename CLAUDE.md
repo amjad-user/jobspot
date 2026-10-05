@@ -100,9 +100,11 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
   (job service down, something missing on the laptop). Small decisions: pick the
   sensible option, write it under "Decisions made while building", keep going.
 - Run the tests after each task; fix failures before moving on. Tick the checklist.
-- **Amjad runs all git commands himself.** At the end of each task: give the exact git
-  commands + a Conventional Commits message, then **wait for "done"** before the next
-  task. This is the only pause.
+- **Git (updated 2026-10-05):** Claude makes **one commit per task** at the end of each
+  task, with a Conventional Commits message and the `Co-Authored-By: Claude` line.
+  After each commit, show Amjad the exact git commands that were run, so he learns them.
+  Then continue with the next task without waiting.
+- **Never run `git push`.** Amjad pushes to GitHub himself after checking the work.
 - When everything is built:
   1. Run the app and check search, filters, save, status changes and stats.
   2. Teach Amjad the code **in the order it runs**: double-click `start.bat` → one search
@@ -113,6 +115,13 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
 
 ### Decisions made while building
 - Job source uses `/pc/v6/jobs` (v4 returns 403).
+- Folders: `backend/` (Python server; `sources/` = job sources), `frontend/` (HTML/CSS/JS),
+  `tests/` (`fake_answers/` = saved fake job-service answers), `data/` (SQLite file, ignored by git).
+- Two requirement files: `requirements.txt` (app only, used by `start.bat`) and
+  `requirements-dev.txt` (adds pytest). Versions are pinned.
+- Settings come from `.env` via python-dotenv in `backend/config.py`; every setting has a
+  default, so the app works without `.env`. Server runs on `127.0.0.1` only (local-only).
+- pytest hides a Starlette DeprecationWarning about its own test client (not our code).
 
 ## Progress checklist
 ### Step 1 — Design first
@@ -137,7 +146,7 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
 ### Step 3 — Build
 - [x] 1. Test the Jobsuche service by hand on Amjad's laptop (one request) — done 2026-10-05:
       v4 blocked (403), **v6 works**; field names updated in "Job source details" above.
-- [ ] 2. Project setup: folders, venv, `requirements.txt`, `.gitignore`, `.env.example`, README skeleton
+- [x] 2. Project setup: folders, venv, `requirements.txt`, `.gitignore`, `.env.example`, README skeleton
 - [ ] 3. `Job` model + Jobsuche client that turns the answer into `Job` objects (+ tests)
 - [ ] 4. `GET /api/jobs` search route with filters + friendly errors (+ tests)
 - [ ] 5. SQLite saved-jobs storage (+ tests)
