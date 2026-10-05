@@ -142,6 +142,11 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
   Saving an already-saved job keeps its status. Always `?` placeholders (no SQL injection).
 - Stats count later steps for earlier boxes: Saved = all, Applied = applied+replied+interview+
   rejected, Replies = replied+interview+rejected, Interviews = interview.
+- Saved routes: `GET /api/saved`, `POST /api/saved` (body = whole Job, so saved jobs show
+  without asking the job source again), `PUT /api/saved/{id}/status` (body `{"status": ...}`),
+  `DELETE /api/saved/{id}` (204), `GET /api/stats`. Unknown id → 404 friendly message.
+- `Job.url` must start with http(s):// (checked by Pydantic), so a bad link can't run code.
+- The store is created lazily on first use, so tests never create `data/jobspot.db`.
 
 ## Progress checklist
 ### Step 1 — Design first
@@ -170,7 +175,7 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
 - [x] 3. `Job` model + Jobsuche client that turns the answer into `Job` objects (+ tests)
 - [x] 4. `GET /api/jobs` search route with filters + friendly errors (+ tests)
 - [x] 5. SQLite saved-jobs storage (+ tests)
-- [ ] 6. Saved jobs routes: list, save, change status, remove, stats (+ tests)
+- [x] 6. Saved jobs routes: list, save, change status, remove, stats (+ tests)
 - [ ] 7. Frontend: turn the design into HTML/CSS, then connect it with JavaScript
 - [ ] 8. `start.bat` one-click start + first-run checks
 - [ ] 9. README with screenshots, final clean-up

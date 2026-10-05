@@ -11,7 +11,7 @@ an error instead of letting bad data into the app.
 from datetime import date
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 # The kinds of working time a job can have
 JobType = Literal["full_time", "part_time", "full_or_part_time", "not_stated"]
@@ -29,6 +29,14 @@ class Job(BaseModel):
     job_type: JobType = "not_stated"
     posted_date: Optional[date] = None
     url: str                        # the original job page, where the person applies
+
+    @field_validator("url")
+    @classmethod
+    def url_must_be_a_web_link(cls, url: str) -> str:
+        """Only allow normal web links, so a bad link can never run code in the page."""
+        if url.startswith("https://") or url.startswith("http://"):
+            return url
+        raise ValueError("url must start with http:// or https://")
 
 
 class SearchFilters(BaseModel):
