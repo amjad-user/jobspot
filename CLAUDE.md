@@ -121,7 +121,18 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
   `requirements-dev.txt` (adds pytest). Versions are pinned.
 - Settings come from `.env` via python-dotenv in `backend/config.py`; every setting has a
   default, so the app works without `.env`. Server runs on `127.0.0.1` only (local-only).
-- pytest hides a Starlette DeprecationWarning about its own test client (not our code).
+- pytest hides a Starlette warning about its own test client (not our code).
+- `Job` shape (backend/models.py): `id` = "jobsuche:{referenznummer}", `source`, `title`,
+  `company` ("" if missing), `location` (town of first work place), `distance_km`,
+  `job_type` (full_time / part_time / full_or_part_time / not_stated), `posted_date`, `url`.
+- Posted date = `veroeffentlichungszeitraum.von` (latest publication), fallback
+  `datumErsteVeroeffentlichung`.
+- Link: `externeURL` if it starts with http(s) (safety), else the arbeitsagentur.de job page.
+- 24 jobs per page. The service has no "sort by date" option, so each page is sorted
+  newest first by us. Listings without id or title are skipped.
+- Errors: `JobSourceUnavailable` (no internet, timeout, non-200) and `PlaceNotFound`
+  (service says `suchmodus: UNGUELTIG`). Tests use `httpx.MockTransport` (tests/fakes.py).
+- Fake answers in tests use made-up company names (no real company data in the repo).
 
 ## Progress checklist
 ### Step 1 — Design first
@@ -147,7 +158,7 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
 - [x] 1. Test the Jobsuche service by hand on Amjad's laptop (one request) — done 2026-10-05:
       v4 blocked (403), **v6 works**; field names updated in "Job source details" above.
 - [x] 2. Project setup: folders, venv, `requirements.txt`, `.gitignore`, `.env.example`, README skeleton
-- [ ] 3. `Job` model + Jobsuche client that turns the answer into `Job` objects (+ tests)
+- [x] 3. `Job` model + Jobsuche client that turns the answer into `Job` objects (+ tests)
 - [ ] 4. `GET /api/jobs` search route with filters + friendly errors (+ tests)
 - [ ] 5. SQLite saved-jobs storage (+ tests)
 - [ ] 6. Saved jobs routes: list, save, change status, remove, stats (+ tests)

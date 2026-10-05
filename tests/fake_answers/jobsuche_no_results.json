@@ -1,0 +1,10 @@
+{
+  "maxErgebnisse": 0,
+  "page": 1,
+  "size": 5,
+  "woOutput": {
+    "bereinigterOrt": "Berlin",
+    "suchmodus": "UMKREISSUCHE",
+    "koordinaten": [ { "lat": 52.5112613, "lon": 13.4255145 } ]
+  }
+}

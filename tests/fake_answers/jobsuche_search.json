@@ -1,0 +1,79 @@
+{
+  "ergebnisliste": [
+    {
+      "stellenangebotsart": "ARBEIT",
+      "stellenangebotsTitel": "Barista in Teilzeit (m/w/d)",
+      "arbeitszeitTeilzeitAbend": true,
+      "arbeitszeitTeilzeitNachmittag": true,
+      "arbeitszeitTeilzeitVormittag": true,
+      "arbeitszeitTeilzeitFlexibel": false,
+      "arbeitszeitVollzeit": false,
+      "stellenlokationen": [
+        {
+          "adresse": { "plz": "10707", "ort": "Berlin", "region": "BERLIN", "land": "DEUTSCHLAND" },
+          "breite": 52.4963649,
+          "laenge": 13.3137683
+        }
+      ],
+      "veroeffentlichungszeitraum": { "von": "2026-09-30" },
+      "datumErsteVeroeffentlichung": "2026-09-30",
+      "externeURL": "https://www.example.com/jobs/barista-123",
+      "hauptberuf": "Barista",
+      "firma": "Kaffeebar Sonnenschein GmbH",
+      "referenznummer": "13635-4f50abb5_JB5264739-S",
+      "entfernung": 8
+    },
+    {
+      "stellenangebotsart": "ARBEIT",
+      "stellenangebotsTitel": "Barista ( m/w/d)",
+      "arbeitszeitTeilzeitNachmittag": true,
+      "arbeitszeitVollzeit": true,
+      "stellenlokationen": [
+        {
+          "adresse": { "strasse": "Großbeerenstr.", "hausnummer": "3", "plz": "12107", "ort": "Berlin", "region": "BERLIN", "land": "DEUTSCHLAND" },
+          "breite": 52.438914,
+          "laenge": 13.3816995
+        }
+      ],
+      "veroeffentlichungszeitraum": { "von": "2026-07-21" },
+      "datumErsteVeroeffentlichung": "2026-07-21",
+      "hauptberuf": "Barista",
+      "firma": "Café Mühle & Söhne",
+      "referenznummer": "10001-1003416537-S",
+      "entfernung": 9
+    },
+    {
+      "stellenangebotsart": "ARBEIT",
+      "stellenangebotsTitel": "News Cafe Barista (m/f/d)",
+      "stellenlokationen": [
+        {
+          "adresse": { "plz": "10179", "ort": "Berlin", "region": "BERLIN", "land": "DEUTSCHLAND" }
+        }
+      ],
+      "veroeffentlichungszeitraum": { "von": "2026-10-05" },
+      "datumErsteVeroeffentlichung": "2026-08-20",
+      "hauptberuf": "Barista",
+      "referenznummer": "10001-1003574574-S",
+      "entfernung": 1
+    },
+    {
+      "stellenangebotsart": "ARBEIT",
+      "stellenangebotsTitel": "Mitarbeiter Gästebetreuung & Barista (m/w/x)",
+      "arbeitszeitVollzeit": true,
+      "arbeitszeitTeilzeitVormittag": false,
+      "veroeffentlichungszeitraum": { "von": "2026-09-16" },
+      "datumErsteVeroeffentlichung": "2026-09-16",
+      "hauptberuf": "Fachverkäufer/in - Nahrungsmittel",
+      "firma": "Schokoladenhaus Beispiel GmbH",
+      "referenznummer": "12811-2338226-S"
+    }
+  ],
+  "maxErgebnisse": 6,
+  "page": 1,
+  "size": 4,
+  "woOutput": {
+    "bereinigterOrt": "Berlin",
+    "suchmodus": "UMKREISSUCHE",
+    "koordinaten": [ { "lat": 52.5112613, "lon": 13.4255145 } ]
+  }
+}
