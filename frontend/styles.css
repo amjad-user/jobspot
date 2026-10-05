@@ -1,0 +1,886 @@
+/* =========================================================
+   JobSpot styles
+   Bold & modern: near-black + lime, big rounded corners.
+   ========================================================= */
+
+/* ---------- Colors (light mode) ---------- */
+:root {
+  --background: #F4F4EE;
+  --card: #FFFFFF;
+  --field: #F4F4EE;
+  --text: #141412;
+  --muted: #5A5A52;
+  --border: #DEDED5;
+  --lime: #C8F53B;
+  --on-lime: #141412;
+  --outline: #141412;
+  --danger: #B42318;
+  --skeleton: #E9E9E1;
+
+  --font-heading: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+
+  --radius-card: 18px;
+  --radius-search: 22px;
+  --radius-pill: 999px;
+
+  color-scheme: light;
+}
+
+/* ---------- Colors (dark mode) ---------- */
+/* Used when the person picked dark mode with the moon button ... */
+:root[data-theme="dark"] {
+  --background: #0F100D;
+  --card: #1A1B17;
+  --field: #24251F;
+  --text: #F3F3ED;
+  --muted: #A9A99F;
+  --border: #30312A;
+  --outline: #F3F3ED;
+  --danger: #FF8A80;
+  --skeleton: #2A2B25;
+  color-scheme: dark;
+}
+
+/* ... or when the computer is set to dark mode and nothing was picked */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #0F100D;
+    --card: #1A1B17;
+    --field: #24251F;
+    --text: #F3F3ED;
+    --muted: #A9A99F;
+    --border: #30312A;
+    --outline: #F3F3ED;
+    --danger: #FF8A80;
+    --skeleton: #2A2B25;
+    color-scheme: dark;
+  }
+}
+
+/* ---------- Basics ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+:focus-visible {
+  outline: 3px solid var(--lime);
+  outline-offset: 2px;
+}
+
+.page {
+  flex: 1;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: var(--background);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--lime);
+  color: var(--on-lime);
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--outline);
+}
+
+.logo-text {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.04em;
+}
+
+.main-nav {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.nav-pill {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
+  background: transparent;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-pill:hover {
+  border-color: var(--border);
+}
+
+.nav-pill.is-active {
+  background: var(--text);
+  color: var(--background);
+}
+
+.count-badge {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--lime);
+  color: var(--on-lime);
+  font-size: 13px;
+  font-weight: 800;
+  display: inline-grid;
+  place-items: center;
+}
+
+.theme-button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--card);
+  display: grid;
+  place-items: center;
+}
+
+.theme-button:hover {
+  border-color: var(--outline);
+}
+
+/* Show the moon in light mode and the sun in dark mode */
+.icon-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .icon-sun {
+  display: block;
+}
+
+:root[data-theme="dark"] .icon-moon {
+  display: none;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 32px 0 28px;
+}
+
+.hero-pill {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--outline);
+  background: var(--lime);
+  color: var(--on-lime);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.hero-title {
+  font-size: clamp(40px, 7vw, 76px);
+  font-weight: 800;
+  max-width: 14ch;
+}
+
+/* ---------- Search box ---------- */
+.search-box {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  padding: 10px;
+  border-radius: var(--radius-search);
+  border: 2px solid var(--outline);
+  background: var(--card);
+  box-shadow: 6px 6px 0 var(--text);
+}
+
+.search-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 16px;
+  border-radius: 14px;
+  background: var(--field);
+}
+
+.search-field label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.search-field input {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 2px 0;
+  min-height: 32px;
+  outline: none;
+}
+
+.search-field:focus-within {
+  box-shadow: inset 0 0 0 2px var(--outline);
+}
+
+.search-field input::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.search-button {
+  padding: 0 28px;
+  font-size: 17px;
+}
+
+.form-message {
+  margin: 14px 0 0;
+  color: var(--danger);
+  font-weight: 700;
+}
+
+/* ---------- Buttons ---------- */
+.button {
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  border: 2px solid var(--outline);
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.button-lime {
+  background: var(--lime);
+  color: var(--on-lime);
+  border-color: #141412;
+}
+
+.button-lime:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--text);
+}
+
+.button-outline {
+  background: var(--card);
+  color: var(--text);
+}
+
+.button-outline:hover {
+  background: var(--field);
+}
+
+.button-outline.is-saved {
+  background: var(--text);
+  color: var(--background);
+}
+
+.button-small {
+  min-height: 44px;
+  padding: 0 12px;
+  font-size: 14px;
+  border-width: 2px;
+}
+
+.link-button {
+  min-height: 44px;
+  border: none;
+  background: none;
+  padding: 0 4px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--muted);
+}
+
+.link-button:hover {
+  color: var(--text);
+}
+
+/* ---------- Filters ---------- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filter-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.filter select {
+  min-height: 44px;
+  min-width: 150px;
+  padding: 0 36px 0 14px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  background-color: var(--card);
+  font-weight: 700;
+  appearance: none;
+  /* A small arrow drawn with two gradients, so it works in both color modes */
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.filter select:hover {
+  border-color: var(--outline);
+}
+
+/* ---------- Popular chips ---------- */
+.popular {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.popular-label {
+  font-weight: 700;
+  color: var(--muted);
+  margin-right: 4px;
+}
+
+.chip {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--border);
+  background: var(--card);
+  font-weight: 600;
+}
+
+.chip:hover {
+  border-color: var(--outline);
+}
+
+/* ---------- How it works ---------- */
+.how-it-works {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.how-card {
+  padding: 24px;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.how-card h2 {
+  font-size: 24px;
+  margin-top: 14px;
+}
+
+.how-card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.how-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--lime);
+  color: var(--on-lime);
+  border: 2px solid #141412;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 20px;
+}
+
+/* ---------- Results ---------- */
+.results {
+  margin-top: 44px;
+  /* Leave room for the sticky header when we scroll to the results */
+  scroll-margin-top: 90px;
+}
+
+.results-head {
+  margin-bottom: 20px;
+}
+
+.results-title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+}
+
+.results-subtitle {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.job-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.job-card:hover {
+  border-color: var(--outline);
+}
+
+.job-top {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.job-logo {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--field);
+  border: 2px solid var(--border);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.job-title {
+  font-family: var(--font-heading);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.job-company {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.job-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--field);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tag-new {
+  background: var(--lime);
+  color: var(--on-lime);
+}
+
+.job-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.job-actions .button-lime {
+  flex: 1;
+}
+
+.more-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+/* ---------- Loading skeletons ---------- */
+.loading-text {
+  margin: 0 0 16px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.skeleton-card {
+  height: 200px;
+  border-radius: var(--radius-card);
+  background: var(--skeleton);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.45; }
+  100% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-card {
+    animation: none;
+  }
+}
+
+/* ---------- Message boxes (no results, errors, empty) ---------- */
+.message-box {
+  padding: 40px 24px;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  border: 2px dashed var(--border);
+  text-align: center;
+}
+
+.message-box h3 {
+  font-size: 26px;
+}
+
+.message-box p {
+  margin: 8px auto 20px;
+  max-width: 44ch;
+  color: var(--muted);
+}
+
+/* ---------- Saved jobs page ---------- */
+.page-title {
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 800;
+  margin-top: 16px;
+}
+
+.page-subtitle {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 28px 0;
+}
+
+.stat-box {
+  padding: 18px 20px;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-box:first-child {
+  background: var(--lime);
+  color: var(--on-lime);
+  border: 2px solid #141412;
+}
+
+.stat-box:first-child .stat-label {
+  color: var(--on-lime);
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stat-label {
+  margin-top: 6px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.saved-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.saved-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.saved-top {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+/* The title and company take all free space, so the status badge sits on the right */
+.job-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.status-badge {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 800;
+  background: var(--field);
+  border: 2px solid var(--border);
+}
+
+.status-badge.status-applied,
+.status-badge.status-replied {
+  border-color: var(--outline);
+}
+
+.status-badge.status-interview {
+  background: var(--lime);
+  color: var(--on-lime);
+  border-color: #141412;
+}
+
+.status-badge.status-rejected {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.status-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-row-label {
+  font-weight: 700;
+  color: var(--muted);
+  font-size: 14px;
+  margin-right: 4px;
+}
+
+.status-button {
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--border);
+  background: var(--card);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.status-button:hover {
+  border-color: var(--outline);
+}
+
+.status-button.is-current {
+  background: var(--text);
+  color: var(--background);
+  border-color: var(--text);
+}
+
+.saved-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.remove-button {
+  color: var(--danger);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 20px;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.site-footer p {
+  margin: 2px 0;
+}
+
+.footer-source {
+  margin-top: 8px !important;
+  opacity: 0.8;
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 900px) {
+  .job-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- Phone: everything stacks ---------- */
+@media (max-width: 640px) {
+  .page {
+    padding: 16px 16px 40px;
+  }
+
+  .header-inner {
+    padding: 10px 16px;
+    gap: 8px;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .nav-pill {
+    padding: 0 12px;
+    font-size: 15px;
+  }
+
+  .hero {
+    padding: 16px 0 20px;
+  }
+
+  .search-box {
+    flex-direction: column;
+    box-shadow: 4px 4px 0 var(--text);
+  }
+
+  .search-button {
+    min-height: 52px;
+  }
+
+  .filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .filter select {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .how-it-works,
+  .job-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .saved-top {
+    flex-wrap: wrap;
+  }
+
+  .job-actions,
+  .saved-actions {
+    flex-direction: column;
+  }
+
+  .job-actions .button,
+  .saved-actions .button {
+    width: 100%;
+  }
+}

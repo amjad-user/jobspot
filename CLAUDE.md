@@ -147,6 +147,16 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
   `DELETE /api/saved/{id}` (204), `GET /api/stats`. Unknown id → 404 friendly message.
 - `Job.url` must start with http(s):// (checked by Pydantic), so a bad link can't run code.
 - The store is created lazily on first use, so tests never create `data/jobspot.db`.
+- Frontend: `frontend/index.html`, `styles.css`, `app.js` (plain JS, no libraries). Job text is
+  always put on the page with `textContent` (never `innerHTML`) so listings can't inject code.
+- Job listings are German, so "Popular" chips show English + German and search the German word
+  (e.g. "Sales (Verkäufer)" searches `Verkäufer`).
+- Changing a filter searches again right away. "Show more jobs" loads the next page of 24.
+- The search is kept in the address bar (`?what=…&where=…`), so refresh/bookmarks work;
+  `#saved` opens the saved jobs page. Dark mode choice is remembered in localStorage.
+- "Widen my search" = 100 km + no job type/date filter (hidden if already widest).
+- Browser check: a Playwright script (outside the repo, using installed Edge) clicked through
+  search, filters, show more, save/unsave, status, stats, remove, dark mode, phone width.
 
 ## Progress checklist
 ### Step 1 — Design first
@@ -176,7 +186,7 @@ The clickable prototype was approved. Rebuild it in plain HTML/CSS/JS with these
 - [x] 4. `GET /api/jobs` search route with filters + friendly errors (+ tests)
 - [x] 5. SQLite saved-jobs storage (+ tests)
 - [x] 6. Saved jobs routes: list, save, change status, remove, stats (+ tests)
-- [ ] 7. Frontend: turn the design into HTML/CSS, then connect it with JavaScript
+- [x] 7. Frontend: turn the design into HTML/CSS, then connect it with JavaScript
 - [ ] 8. `start.bat` one-click start + first-run checks
 - [ ] 9. README with screenshots, final clean-up
 - [ ] Later: German language switch, more job sources, Mac start file, desktop app
