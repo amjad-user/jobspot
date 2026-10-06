@@ -138,9 +138,16 @@ its official job search app uses (community documentation:
 [bundesAPI/jobsuche-api](https://github.com/bundesAPI/jobsuche-api)). JobSpot does not
 scrape websites. It only shows the listings and links to the original job page.
 
+> JobSpot is not affiliated with the Bundesagentur für Arbeit. Job listings come
+> from their public job search service.
+
 ## Ideas for later
 
 - German language switch
 - More job sources (for example Adzuna or Arbeitnow)
 - Start file for Mac
 - Desktop app with its own icon
+
+## License
+
+[MIT](LICENSE) © 2026 Amjad

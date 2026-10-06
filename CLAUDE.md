@@ -174,7 +174,8 @@ When someone says "set this up and run it for me":
   `.venv\installed-requirements.txt`. `start.bat` must keep CRLF line endings (.gitattributes).
 - Tested a real first start on a fresh copy in a folder with a space in its name (~14 s).
 - README screenshots live in `docs/screenshots/` (taken with a temporary database, live listings).
-- No LICENSE file yet — Amjad decides which license (MIT is common for portfolio projects).
+- License: MIT, "Copyright (c) 2026 Amjad" (LICENSE file, linked in README).
+- README says JobSpot is not affiliated with the Bundesagentur für Arbeit.
 
 ## Progress checklist
 ### Step 1 — Design first
